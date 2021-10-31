@@ -1,7 +1,9 @@
 {
+    "parser": "@babel/eslint-parser",
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "mocha": true
     },
     "extends": [
         "airbnb-base"

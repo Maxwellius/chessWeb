@@ -2,9 +2,9 @@
 
 module.exports = {  
   exit: true,
-  require: '@babel/register',
+  require:['chai', '@babel/register'],
   reporter: 'spec',
   package: './package.json',
   recursive: true,
-  'watch-files': ['./tests/*.js', './tests/**/*.js']
+  'watch-files': ['./tests/*.js', './tests/**/*.js'],
 }

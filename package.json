@@ -6,8 +6,8 @@
     "serve": "NODE_ENV=production node dist/index.js",
     "start": "NODE_ENV=development babel-node src/index.js",
     "dev": "DEBUG=server:debug NODE_ENV=development nodemon src/index.js --exec babel-node --inspect",
-    "test": "DEBUG=server:debug NODE_ENV=test mocha --require babel-core/register --reporter spec --exit   tests/ --recursive --exec babel-node",
-    "test:watch": "DEBUG=server:debug NODE_ENV=development mocha  --require babel-core/register --watch --reporter  spec   tests/ --exec babel-node",
+    "test": "DEBUG=server:debug NODE_ENV=test mocha --require @babel/register --reporter spec --exit   tests/ --recursive --exec babel-node",
+    "test:watch": "DEBUG=server:debug NODE_ENV=development mocha  --require @babel/register --watch --reporter  spec   tests/ --exec babel-node",
     "eslint": "eslint src/**/*.js --ignore-pattern \"node_modules/\"",
     "lint": "eslint {src,tests}/**/*.js --fix"
   },
@@ -16,8 +16,9 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.15.8",
-    "babel-cli": "^6.26.0",
-    "babel-preset-node8": "^1.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "babel-core": "7.0.0-bridge.0",
     "chai": "^4.2.0",
     "config": "^3.0.1",
     "debug": "^4.1.1",
@@ -29,7 +30,17 @@
   },
   "babel": {
     "presets": [
-      "node8"
+      [
+        "@babel/preset-env",
+        {
+          "useBuiltIns": "usage",
+          "corejs": 3
+        }
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-object-rest-spread"
     ]
   },
   "engines": {
@@ -57,9 +68,13 @@
     }
   },
   "dependencies": {
+    "@babel/eslint-parser": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
     "@babel/register": "^7.15.3",
-    "babel-core": "^6.26.3",
     "chai-things": "^0.2.0",
+    "core-js": "^3.19.0",
+    "espree": "^7.3.1",
     "express": "^4.16.4",
     "mongoose": "^5.4.11",
     "nyc": "^15.1.0"
